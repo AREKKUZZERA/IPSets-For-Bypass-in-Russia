@@ -1,0 +1,44 @@
+name: Weekly Release
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 1'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate dataset
+        run: python tools/validate.py
+
+      - name: Build dist artifacts
+        run: python tools/build.py
+
+      - name: Update README stats
+        run: python tools/stats.py
+
+      - name: Prepare release tag
+        id: prep
+        run: echo "tag=weekly-$(date -u +%Y%m%d)" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub release and upload artifacts
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.prep.outputs.tag }}
+          name: ${{ steps.prep.outputs.tag }}
+          generate_release_notes: true
+          files: |
+            dist/*.txt
+            dist/checksums.txt
