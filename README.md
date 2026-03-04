@@ -1,39 +1,77 @@
-Если хотите меня поддержать донатом) - https://www.donationalerts.com/r/aanxi3tyy
+# IPSets Dataset and Build Pipeline
 
----------------------
+This repository maintains a **structured CIDR dataset** with provenance metadata and generates versioned text artifacts in `dist/`.
 
-Список IP которые стали недоступны 10.06.2025-xx.xx.2026, среди них - Amazon CDN, Amazon Cloudfront, Cloudflare, BunnyCDN, OVH SAS и прочие.
+## Repository layout
 
-Все они брались с - https://stat.ripe.net/
+- `data/entries.json` — source-of-truth dataset (edit this file for content changes).
+- `data/schemas/entries.schema.json` — JSON schema for dataset structure.
+- `data/sources.md` — provenance and source requirements.
+- `tools/validate.py` — policy and data integrity checks.
+- `tools/build.py` — deterministic generator for `dist/*.txt` and checksums.
+- `tools/stats.py` — updates the stats block in this README.
+- `dist/` — generated outputs only. **Do not edit by hand.**
 
---------------------
+## Data model and policy
 
-Пожалуйста, делайте pull requests сюда, дабы пополнить пул CIDR в данном листе, т.к нам необходимо восстановить работу интернета в России. Да поможет вам бог!
+Each dataset entry includes CIDR, category, confidence, source metadata, and verification timestamps.
 
---------------
+Validation enforces:
 
-Если у вас не прогружаются сайты, выдает ошибку ERR_SSL_PROTOCOL_ERROR - поменяйте стратегию обхода с md5sig на badseq
+- CIDR correctness for IPv4/IPv6.
+- Required source metadata (`kind`, `ref`, `url`).
+- No duplicate CIDR+category records.
+- No overlaps inside the same category.
+- Wide-range policy:
+  - IPv4 prefixes broader than `/12` require `wide_ok: true` and explanatory `notes`.
+  - IPv6 prefixes broader than `/32` require `wide_ok: true` and explanatory `notes`.
 
----------
+## Local workflow
 
-AS Parser - автоматически отыщет CIDR Адреса, отсортирует их в читабельный вид, и впринципе хороший скрипт. Поможет вам если вы хотите делать свой список + предлагать pull requests).
+```bash
+python tools/validate.py
+python tools/build.py
+python tools/stats.py
+```
 
----------
+If data changed, commit both `data/*` and regenerated `dist/*` plus README stats updates.
 
-Разблокировка Telegram если вы живете на юге России - Невозможна, используйте SOCKS5 или MTProto прокси. Блокировка реализована без использования ТСПУ провайдерами. Наглухо заблокирован только IP адрес веб морды (telegram.org). Зеркала для (telegram.org) как и адреса всех дата-центров заблокированы по портам (80 443 88 8443). Если нужно разблокировать и клиенты и вебсайты, то здесь только использование VPN. К сожалению zapret тут не поможет
+## Generated outputs
 
----------
+- `dist/ipset-all.txt` — unique CIDR list across all categories (backward-compatible semantics).
+- `dist/ipset-<category>.txt` — unique CIDR list per category.
+- `dist/checksums.txt` — SHA256 checksums for generated text files.
 
-Список основан из репозитория **zapret** от Flowseal - https://github.com/Flowseal/zapret-discord-youtube
+## Migration note
 
----------
+The former root-level `ipset-all.txt` has been migrated to `dist/ipset-all.txt` and is now generated from `data/entries.json`.
 
-Помогите поддержать проект звездочкой, поставьте ⭐ на этот репозиторий!
+## Dataset status
 
-<a href="https://www.star-history.com/#V3nilla/IPSets-For-Bypass-in-Russia&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=V3nilla/IPSets-For-Bypass-in-Russia&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=V3nilla/IPSets-For-Bypass-in-Russia&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=V3nilla/IPSets-For-Bypass-in-Russia&type=date&legend=top-left" />
- </picture>
-</a>
+> Current records are placeholder documentation ranges to bootstrap tooling and CI. Maintainers should replace them with verified data and preserve provenance fields.
+
+<!-- STATS:BEGIN -->
+### Dataset Stats
+
+- Total entries: **7**
+- Counts by category:
+  - `cdn`: 2
+  - `cloud`: 1
+  - `dns`: 1
+  - `hosting`: 1
+  - `messaging`: 1
+  - `misc`: 1
+- Counts by confidence:
+  - `high`: 1
+  - `low`: 4
+  - `medium`: 2
+- Oldest `last_verified_at`: **2026-01-01**
+<!-- STATS:END -->
+
+## Governance
+
+See:
+
+- [CONTRIBUTING.md](CONTRIBUTING.md)
+- [SECURITY.md](SECURITY.md)
+- [LICENSE](LICENSE)

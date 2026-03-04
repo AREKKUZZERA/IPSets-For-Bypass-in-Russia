@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "generated_hint": "NOTE: Placeholder documentation-only ranges are included for bootstrapping. Replace with verified real-world data before production use.",
+  "entries": [
+    {
+      "cidr": "192.0.2.0/24",
+      "label": "Example CDN A",
+      "category": "cdn",
+      "source": {
+        "kind": "manual",
+        "ref": "example-cdn-a",
+        "url": "https://example.com/source/cdn-a"
+      },
+      "added_at": "2026-01-01",
+      "last_verified_at": "2026-01-01",
+      "confidence": "low",
+      "notes": "RFC5737 documentation range placeholder."
+    },
+    {
+      "cidr": "198.51.100.0/24",
+      "label": "Example Cloud Provider",
+      "category": "cloud",
+      "source": {
+        "kind": "manual",
+        "ref": "example-cloud",
+        "url": "https://example.com/source/cloud"
+      },
+      "added_at": "2026-01-01",
+      "last_verified_at": "2026-01-01",
+      "confidence": "low",
+      "notes": "RFC5737 documentation range placeholder."
+    },
+    {
+      "cidr": "203.0.113.0/24",
+      "label": "Example Hosting Segment",
+      "category": "hosting",
+      "source": {
+        "kind": "manual",
+        "ref": "example-hosting",
+        "url": "https://example.com/source/hosting"
+      },
+      "added_at": "2026-01-01",
+      "last_verified_at": "2026-01-01",
+      "confidence": "low",
+      "notes": "RFC5737 documentation range placeholder."
+    },
+    {
+      "cidr": "203.0.114.0/24",
+      "label": "Example Messaging Provider",
+      "category": "messaging",
+      "source": {
+        "kind": "manual",
+        "ref": "example-messaging",
+        "url": "https://example.com/source/messaging"
+      },
+      "added_at": "2026-01-01",
+      "last_verified_at": "2026-01-01",
+      "confidence": "medium",
+      "notes": "Test-only placeholder; replace with sourced data."
+    },
+    {
+      "cidr": "203.0.115.0/24",
+      "label": "Example DNS Resolver Space",
+      "category": "dns",
+      "source": {
+        "kind": "manual",
+        "ref": "example-dns",
+        "url": "https://example.com/source/dns"
+      },
+      "added_at": "2026-01-01",
+      "last_verified_at": "2026-01-01",
+      "confidence": "high",
+      "notes": "Test-only placeholder; replace with sourced data."
+    },
+    {
+      "cidr": "2001:db8:100::/48",
+      "label": "Example IPv6 Misc Segment",
+      "category": "misc",
+      "source": {
+        "kind": "manual",
+        "ref": "example-misc-v6",
+        "url": "https://example.com/source/misc-v6"
+      },
+      "added_at": "2026-01-01",
+      "last_verified_at": "2026-01-01",
+      "confidence": "low",
+      "notes": "RFC3849 documentation range placeholder."
+    },
+    {
+      "cidr": "2001:db8:200::/48",
+      "label": "Example IPv6 CDN Segment",
+      "category": "cdn",
+      "source": {
+        "kind": "manual",
+        "ref": "example-cdn-v6",
+        "url": "https://example.com/source/cdn-v6"
+      },
+      "added_at": "2026-01-01",
+      "last_verified_at": "2026-01-01",
+      "confidence": "medium",
+      "notes": "RFC3849 documentation range placeholder."
+    }
+  ]
+}
