@@ -1,0 +1,110 @@
+{
+  "generated_at": "2026-03-09T21:32:55.107224+00:00",
+  "stage": "stage-2-partial-migration",
+  "input_mode": "hybrid",
+  "inputs": {
+    "ipset": "ipset-all.txt",
+    "exclude": "exclude.txt",
+    "exclude_domains": "exclude-domains.txt",
+    "sources_dir": "sources/*.json"
+  },
+  "counts": {
+    "cidrs": 15727,
+    "excludes": 2,
+    "exclude_domains": 29,
+    "records_total": 15763
+  },
+  "stats": {
+    "by_type": {
+      "cidr": 15734,
+      "domain": 29
+    },
+    "by_source": {
+      "stage2-seed": 3,
+      "ipset-all.txt": 15726,
+      "exclude.txt": 6,
+      "exclude-domains.txt": 28
+    }
+  },
+  "warnings": [
+    "Overlapping CIDRs: 2606:4700::/36 and 2606:4700::/32",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:1100::/40",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:1200::/48",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:2ff9::/48",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:2ffa::/47",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:2ffc::/48",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:2ffe::/47",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:3000::/42",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:304e::/47",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:3052::/47",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:3055::/48",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:3056::/47",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:3108::/48",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:310c::/48",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:3110::/44",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:4000::/43",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:4020::/45",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:4028::/46",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:4030::/45",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:4038::/46",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:403c::/47",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:4043::/48",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:4044::/48",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:4046::/47",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:4048::/46",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:404c::/48",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:42c8::/45",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:43d8::/45",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:4400::/44",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:4700::/48",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:7000::/48",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:8390::/44",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:83b0::/44",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:8ca0::/44",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:8d70::/44",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:8d90::/44",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:8dd0::/44",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:8de0::/44",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:90c0::/43",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:91b0::/44",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:9640::/44",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:9760::/44",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:99e0::/44",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:9a60::/44",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:9a90::/44",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:9ad0::/44",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:9ae0::/44",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:9b00::/44",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:9c60::/44",
+    "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:ff00::/48"
+  ],
+  "problems": [],
+  "errors": [],
+  "needs_review": [
+    {
+      "value": "2606:4700::/32",
+      "reason": "pre-marked",
+      "source": "stage2-seed"
+    },
+    {
+      "value": "0.0.0.0/8",
+      "reason": "special-purpose-range",
+      "source": "exclude.txt"
+    },
+    {
+      "value": "10.0.0.0/8",
+      "reason": "special-purpose-range",
+      "source": "exclude.txt"
+    },
+    {
+      "value": "127.0.0.0/8",
+      "reason": "special-purpose-range",
+      "source": "exclude.txt"
+    },
+    {
+      "value": "192.168.0.0/16",
+      "reason": "special-purpose-range",
+      "source": "exclude.txt"
+    }
+  ]
+}
