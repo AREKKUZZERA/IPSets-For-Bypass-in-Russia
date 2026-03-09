@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "name": "stage2-seed",
+    "description": "Partial machine-readable migration from legacy lists. Preferred for new records.",
+    "preferred_source_of_truth": true
+  },
+  "records": [
+    {
+      "type": "cidr",
+      "value": "1.1.1.0/24",
+      "service": "cloudflare-dns",
+      "category": "dns",
+      "source": "stage2-seed",
+      "source_url": "https://stat.ripe.net/",
+      "comment": "Seed migrated from ipset-all.txt",
+      "tags": ["seed", "legacy-migrated"],
+      "action": "proxy",
+      "platforms": ["linux", "windows"],
+      "priority": 90,
+      "needs_review": false,
+      "confidence": 0.9,
+      "updated_at": "2026-03-09T00:00:00Z"
+    },
+    {
+      "type": "cidr",
+      "value": "2606:4700::/32",
+      "service": "cloudflare",
+      "category": "cdn",
+      "source": "stage2-seed",
+      "source_url": "https://stat.ripe.net/",
+      "comment": "IPv6 sample for stage 2",
+      "tags": ["ipv6", "seed"],
+      "action": "proxy",
+      "platforms": ["linux", "windows", "macos"],
+      "priority": 95,
+      "needs_review": true,
+      "confidence": 0.6,
+      "updated_at": "2026-03-09T00:00:00Z"
+    },
+    {
+      "type": "domain",
+      "value": "example.org",
+      "service": "example",
+      "category": "test",
+      "source": "stage2-seed",
+      "source_url": "https://example.org",
+      "comment": "Exclude sample in new source format",
+      "tags": ["seed"],
+      "action": "exclude",
+      "platforms": ["all"],
+      "priority": 100,
+      "needs_review": false,
+      "confidence": 0.8,
+      "updated_at": "2026-03-09T00:00:00Z"
+    }
+  ]
+}
