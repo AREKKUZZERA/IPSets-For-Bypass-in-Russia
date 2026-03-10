@@ -3,17 +3,33 @@ name: validate
 on:
   pull_request:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test-and-validate:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Install test dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install pytest
       - name: Run unit tests
-        run: python -m pytest -q
-      - name: Run validate
-        run: python -m scripts.validate
+        run: |
+          set -euo pipefail
+          python -m pytest -q
+      - name: Validate input data
+        run: |
+          set -euo pipefail
+          python -m scripts.validate --input-mode=hybrid
+      - name: Deterministic build smoke check
+        run: |
+          set -euo pipefail
+          python -m scripts.check_deterministic_build --input-mode=hybrid --profile=full

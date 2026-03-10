@@ -1,0 +1,40 @@
+name: scheduled-update
+
+on:
+  schedule:
+    - cron: '23 3 * * *'
+  workflow_dispatch:
+
+jobs:
+  rebuild-and-pr:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Rebuild dist outputs
+        run: |
+          set -euo pipefail
+          python -m scripts.build --input-mode=hybrid --profile=full --deterministic --checksums
+      - name: Create pull request with updates
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: chore/scheduled-update
+          delete-branch: true
+          commit-message: 'chore(data): scheduled refresh of generated artifacts'
+          title: 'chore(data): scheduled refresh of generated artifacts'
+          body: |
+            Automated scheduled update:
+            - rebuilt normalized outputs;
+            - regenerated manifest and checksums;
+            - opened PR instead of pushing directly to main.
+          labels: |
+            automated
+            scheduled-update
