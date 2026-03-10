@@ -1,34 +1,28 @@
-# Architecture (Stage 2)
+# Architecture (Stage 3)
 
 ## Scope
-Stage 2 introduces stricter internal modeling and partial migration to structured sources while preserving legacy compatibility.
+Stage 3 adds a modular export layer for modern generated formats while preserving legacy ipset compatibility.
 
 ## Data flow
-1. Load input records from selected mode:
-   - legacy files,
-   - new `sources/*.json`,
-   - or both (hybrid).
-2. Validate and normalize records.
-3. Classify records by action (include/exclude/neutral/direct).
-4. Apply strict checks:
-   - overlap detection,
-   - include/exclude conflicts,
-   - special-range filtering,
-   - IPv6 handling.
-5. Keep uncertain records in `needs_review` instead of silent drops.
-6. Emit generated lists + enriched manifest.
+1. Load records from `legacy`, `sources`, or `hybrid` mode.
+2. Normalize + validate records into a single internal model (`NormalizedData`).
+3. Apply export profile (`full|lite|domains-only|ip-only`).
+4. Generate all outputs through `scripts/exporters/*`.
+5. Emit manifest with artifact metadata and empty-export warnings.
 
 ## Modules
-- `scripts/models.py` — internal typed DTOs, source record model.
-- `scripts/source_loader.py` — adapters for legacy + `sources/*.json`.
-- `scripts/normalization.py` — normalization, conflict/overlap checks, sorting.
-- `scripts/validate.py` — CLI validation with `--strict` and `--input-mode`.
-- `scripts/build.py` — artifact generation and manifest enrichment.
+- `scripts/models.py` — internal data model.
+- `scripts/normalization.py` — normalization and checks.
+- `scripts/build.py` — orchestration + manifest.
+- `scripts/exporters/profiles.py` — profile filtering.
+- `scripts/exporters/ipset.py` — legacy compatibility exporter.
+- `scripts/exporters/singbox.py` — sing-box source rule-set exporter.
+- `scripts/exporters/mihomo.py` — mihomo providers (yaml/text).
+- `scripts/exporters/nftables.py` — nftables include sets.
 
 ## Build artifacts
-- `dist/ipset/ipset-all.txt`
-- `dist/ipset/exclude.txt`
-- `dist/ipset/exclude-domains.txt`
+- `dist/ipset/*` (legacy compatibility)
+- `dist/sing-box/*` (source JSON rule-sets)
+- `dist/mihomo/*` (rule-providers)
+- `dist/nftables/*` (include files)
 - `dist/manifest.json`
-
-All generated text artifacts are marked as non-editable manually.

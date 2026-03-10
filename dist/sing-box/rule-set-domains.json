@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "domain_suffix": [
+        "2ch.hk",
+        "2ip.ru",
+        "3dnews.ru",
+        "akamaitechnologies.com",
+        "citilink.ru",
+        "dns-shop.ru",
+        "donationalerts.com",
+        "example.org",
+        "faceit.com",
+        "gosuslugi.ru",
+        "gu-st.ru",
+        "habr.com",
+        "mail.ru",
+        "microsoft.com",
+        "msi.com",
+        "mts.ru",
+        "multimc.org",
+        "nvidia.com",
+        "ozon.ru",
+        "rf4game.com",
+        "rf4game.ru",
+        "sberbank.ru",
+        "valve.net",
+        "vk.com",
+        "wildberries.ru",
+        "ya.ru",
+        "yandex.com",
+        "yandex.kz",
+        "yandex.ru"
+      ]
+    }
+  ]
+}

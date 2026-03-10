@@ -1,0 +1,13 @@
+rule-providers:
+  bypass-domains:
+    type: file
+    behavior: classical
+    path: ./dist/mihomo/domains.yaml
+  bypass-ipcidr:
+    type: file
+    behavior: classical
+    path: ./dist/mihomo/ipcidr.yaml
+
+rules:
+  - RULE-SET,bypass-domains,PROXY
+  - RULE-SET,bypass-ipcidr,PROXY

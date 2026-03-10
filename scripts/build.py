@@ -3,7 +3,8 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 
-from scripts.io_utils import write_generated_list, write_manifest
+from scripts.exporters import PROFILES, export_all
+from scripts.io_utils import write_manifest
 from scripts.models import LegacyInputs
 from scripts.normalization import normalize
 
@@ -12,6 +13,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Build normalized artifacts")
     parser.add_argument("--strict", action="store_true", help="Fail on warnings/problems/needs_review")
     parser.add_argument("--input-mode", choices=["legacy", "hybrid", "sources"], default="hybrid")
+    parser.add_argument("--profile", choices=sorted(PROFILES.keys()), default="full")
     args = parser.parse_args()
 
     inputs = LegacyInputs(
@@ -20,15 +22,13 @@ def main() -> int:
         exclude_domains_path="exclude-domains.txt",
     )
     data, validation = normalize(inputs, input_mode=args.input_mode)
-
-    write_generated_list("dist/ipset/ipset-all.txt", data.cidrs)
-    write_generated_list("dist/ipset/exclude.txt", data.excludes)
-    write_generated_list("dist/ipset/exclude-domains.txt", data.exclude_domains)
+    exports = export_all(data, profile=args.profile)
 
     manifest = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "stage": "stage-2-partial-migration",
+        "stage": "stage-3-exports",
         "input_mode": args.input_mode,
+        "build_profile": args.profile,
         "inputs": {
             "ipset": inputs.ipset_path,
             "exclude": inputs.exclude_path,
@@ -45,7 +45,8 @@ def main() -> int:
             "by_type": data.stats.get("by_type", {}),
             "by_source": data.stats.get("by_source", {}),
         },
-        "warnings": validation.warnings,
+        "artifacts": [a.__dict__ for a in exports.artifacts],
+        "warnings": [*validation.warnings, *exports.warnings],
         "problems": validation.problems,
         "errors": validation.errors,
         "needs_review": data.needs_review,
@@ -54,7 +55,7 @@ def main() -> int:
 
     if validation.errors:
         return 1
-    if args.strict and (validation.warnings or validation.problems or data.needs_review):
+    if args.strict and (manifest["warnings"] or validation.problems or data.needs_review):
         return 1
     return 0
 

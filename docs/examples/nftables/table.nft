@@ -1,0 +1,9 @@
+table inet bypass {
+  include "./dist/nftables/include.nft"
+
+  chain prerouting {
+    type filter hook prerouting priority 0;
+    ip daddr @bypass_ip accept
+    ip6 daddr @bypass_ip6 accept
+  }
+}
