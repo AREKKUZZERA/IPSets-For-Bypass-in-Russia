@@ -1,7 +1,8 @@
 {
-  "generated_at": "2026-03-09T21:32:55.107224+00:00",
-  "stage": "stage-2-partial-migration",
+  "generated_at": "2026-03-09T23:21:41.434071+00:00",
+  "stage": "stage-3-exports",
   "input_mode": "hybrid",
+  "build_profile": "full",
   "inputs": {
     "ipset": "ipset-all.txt",
     "exclude": "exclude.txt",
@@ -26,6 +27,104 @@
       "exclude-domains.txt": 28
     }
   },
+  "artifacts": [
+    {
+      "path": "ipset/ipset-all.txt",
+      "format": "ipset",
+      "kind": "cidr-list",
+      "count": 15727
+    },
+    {
+      "path": "ipset/exclude.txt",
+      "format": "ipset",
+      "kind": "exclude-cidr-list",
+      "count": 2
+    },
+    {
+      "path": "ipset/exclude-domains.txt",
+      "format": "ipset",
+      "kind": "exclude-domain-list",
+      "count": 29
+    },
+    {
+      "path": "sing-box/rule-set-aggregate.json",
+      "format": "sing-box-source",
+      "kind": "aggregate",
+      "count": 15756
+    },
+    {
+      "path": "sing-box/rule-set-domains.json",
+      "format": "sing-box-source",
+      "kind": "domains",
+      "count": 29
+    },
+    {
+      "path": "sing-box/rule-set-ipcidr.json",
+      "format": "sing-box-source",
+      "kind": "ipcidr",
+      "count": 15727
+    },
+    {
+      "path": "sing-box/rule-set-ipv4.json",
+      "format": "sing-box-source",
+      "kind": "ipv4",
+      "count": 11747
+    },
+    {
+      "path": "sing-box/rule-set-ipv6.json",
+      "format": "sing-box-source",
+      "kind": "ipv6",
+      "count": 3980
+    },
+    {
+      "path": "mihomo/domains.yaml",
+      "format": "mihomo",
+      "kind": "domains-rule-provider",
+      "count": 29
+    },
+    {
+      "path": "mihomo/ipcidr.yaml",
+      "format": "mihomo",
+      "kind": "ipcidr-rule-provider",
+      "count": 15727
+    },
+    {
+      "path": "mihomo/ipcidr.txt",
+      "format": "mihomo",
+      "kind": "ipcidr-text",
+      "count": 15727
+    },
+    {
+      "path": "mihomo/ipv4.txt",
+      "format": "mihomo",
+      "kind": "ipv4-text",
+      "count": 11747
+    },
+    {
+      "path": "mihomo/ipv6.txt",
+      "format": "mihomo",
+      "kind": "ipv6-text",
+      "count": 3980
+    },
+    {
+      "path": "nftables/ipv4.nft",
+      "format": "nftables",
+      "kind": "ipv4-set",
+      "count": 11747
+    },
+    {
+      "path": "nftables/ipv6.nft",
+      "format": "nftables",
+      "kind": "ipv6-set",
+      "count": 3980
+    },
+    {
+      "path": "nftables/include.nft",
+      "format": "nftables",
+      "kind": "include",
+      "count": 2
+    }
+  ],
   "warnings": [
     "Overlapping CIDRs: 2606:4700::/36 and 2606:4700::/32",
     "Overlapping CIDRs: 2606:4700::/32 and 2606:4700:1100::/40",

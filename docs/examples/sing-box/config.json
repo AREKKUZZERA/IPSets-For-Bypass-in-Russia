@@ -1,0 +1,18 @@
+{
+  "route": {
+    "rule_set": [
+      {
+        "type": "local",
+        "tag": "bypass-ru-aggregate",
+        "format": "source",
+        "path": "./dist/sing-box/rule-set-aggregate.json"
+      }
+    ],
+    "rules": [
+      {
+        "rule_set": ["bypass-ru-aggregate"],
+        "outbound": "proxy"
+      }
+    ]
+  }
+}
